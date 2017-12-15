@@ -7,6 +7,7 @@ import json
 from urlparse import urlparse
 
 from cache_utils.decorators import cached
+from classtools import reify
 from dateutil import parser as date_parser
 from markdown import markdown
 from PIL import Image, ImageFilter
@@ -23,6 +24,7 @@ from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.core.urlresolvers import reverse
 from django.templatetags.static import static
+from django.utils.timezone import get_default_timezone
 
 
 from .managers import TrackManager, NoteManager
@@ -285,20 +287,23 @@ class Show(CleanOnSaveMixin, models.Model):
             'date': self.showtime.date().strftime('%Y-%m-%d')
         })
 
-    def api_dict(self, verbose=False):
+    @reify
+    def start(self):
         prev = self.prev()
-        if prev is None:
-            start = None
-        else:
-            start = prev.end
 
+        if prev is None:
+            return None
+        else:
+            return prev.end
+
+    def api_dict(self, verbose=False):
         return {
             'playlist': [p.api_dict() for p in self.plays()],
             'added': [t.api_dict() for t in self.revealed()],
             'votes': [v.api_dict() for v in self.votes()],
             'showtime': self.showtime,
             'finish': self.end,
-            'start': start,
+            'start': self.start,
             'broadcasting': self.broadcasting(),
             'message_markdown': self.message or None,
             'message_html': markdown(self.message) if self.message else None,
@@ -309,7 +314,7 @@ class TwitterUser(CleanOnSaveMixin, models.Model):
     # Twitter stuff
     screen_name = models.CharField(max_length=100)
     user_id = models.BigIntegerField(unique=True)
-    name = models.CharField(max_length=20)
+    name = models.CharField(max_length=100)
 
     # nkdsu stuff
     is_abuser = models.BooleanField(default=False)
@@ -552,19 +557,43 @@ class Track(CleanOnSaveMixin, models.Model):
 
         return (show.end - self.last_play().date).days / 7
 
-    @property
+    @reify
     def title(self):
         return self.split_id3_title()[0]
 
-    @property
+    @reify
     def album(self):
         return self.id3_album
 
-    @property
+    @reify
     def role(self):
         return self.split_id3_title()[1]
 
-    @property
+    @reify
+    def role_detail(self):
+        if self.role is None:
+            return {}
+
+        return re.match(
+            r'^(?P<anime>.*?) ?\b(?P<role>'
+
+            r'(rebroadcast )?\b('
+
+            r'((ED|OP)\d*\b.*)|'
+            r'((character|image) song\b.*)|'
+            r'(ep\d+\b.*)|'
+            r'(insert (track|song)\b.*)|'
+            r'(ins)|'
+            r'((main )?theme ?\d*)|'
+            r'(bgm\b.*)|'
+            r'(ost)|'
+
+            r'()))$',
+            self.role,
+            flags=re.IGNORECASE,
+        ).groupdict()
+
+    @reify
     def artist(self):
         return self.id3_artist
 
@@ -881,6 +910,7 @@ MANUAL_VOTE_KINDS = (
     ('text', 'text'),
     ('tweet', 'tweet'),
     ('person', 'in person'),
+    ('phone', 'on the phone'),
 )
 
 
@@ -1006,7 +1036,7 @@ class Vote(SetShowBasedOnDateMixin, CleanOnSaveMixin, models.Model):
     def either_name(self):
         return self.name or '@{0}'.format(self.twitter_user.screen_name)
 
-    @property
+    @reify
     def is_manual(self):
         return not bool(self.tweet_id)
 
@@ -1034,7 +1064,10 @@ class Vote(SetShowBasedOnDateMixin, CleanOnSaveMixin, models.Model):
         content = self.text
 
         if not self.is_manual:
-            if content.startswith('@'):
+            while (
+                content.lower()
+                .startswith('@{}'.format(settings.READING_USERNAME).lower())
+            ):
                 content = content.split(' ', 1)[1]
 
             content = content.strip('- ')
@@ -1047,6 +1080,39 @@ class Vote(SetShowBasedOnDateMixin, CleanOnSaveMixin, models.Model):
                     content = content.replace(word, '').strip()
 
         return content
+
+    @memoize
+    def birthday(self):
+        content = self.content()
+        return (
+            content and
+            re.search(r'\b(birthday|bday)\b', content, flags=re.IGNORECASE)
+        )
+
+    @reify
+    def hat(self):
+        """
+        Get the most important badge for a given vote, where the most important
+        badge is the last one defined in `BADGES`.
+        """
+
+        badge_order = [b[0] for b in BADGES]
+
+        for badge in sorted(
+            (
+                b for b in self.twitter_user.userbadge_set.all()
+                if (
+                    b.badge_info['start'] is None or
+                    b.badge_info['start'] <= self.show.end
+                ) and (
+                    b.badge_info['finish'] is None or
+                    b.badge_info['finish'] >= self.show.end
+                )
+            ),
+            key=lambda b: badge_order.index(b.badge),
+            reverse=True,
+        ):
+            return badge
 
     @memoize
     @pk_cached(indefinitely)
@@ -1235,3 +1301,70 @@ class Note(CleanOnSaveMixin, models.Model):
 
     def __unicode__(self):
         return self.content
+
+
+class Badge(tuple):
+    def __new__(cls, *args):
+        return super(Badge, cls).__new__(cls, args)
+
+    def info(self, user):
+        slug, description, summary, icon, url, start, finish = self
+
+        return {
+            'slug': slug,
+            'description': description.format(user=user),
+            'summary': summary,
+            'icon': icon,
+            'url': url,
+            'start': Show.at(start).showtime if start is not None else None,
+            'finish': Show.at(finish).end if finish is not None else None,
+        }
+
+
+BADGES = [
+    Badge(
+        'tblc',
+        u'{user.name} bought Take Back Love City for the RSPCA.',
+        'put up with bad music for animals',
+        'headphones',
+        'https://desus.bandcamp.com/album/take-back-love-city',
+        None,
+        datetime.datetime(1990, 1, 1, tzinfo=get_default_timezone()),
+    ),
+    Badge(
+        'charity-2016',
+        u'{user.name} donated to the Very Scary Scenario charity streams for '
+        u'Special Effect in 2016.',
+        'likes fun, hates exclusion',
+        'heart',
+        'https://www.justgiving.com/fundraising/very-scary-scenario',
+        datetime.datetime(2016, 10, 15, tzinfo=get_default_timezone()),
+        datetime.datetime(2016, 11, 15, tzinfo=get_default_timezone()),
+    ),
+    Badge(
+        'charity-2017',
+        u'{user.name} donated to the Very Scary Scenario charity streams and '
+        u'Neko Desu All-Nighter for Cancer Research UK in 2017.',
+        'likes depriving people of sleep, hates cancer',
+        'heart',
+        'https://www.justgiving.com/fundraising/very-charity-scenario-2017',
+        datetime.datetime(2017, 10, 1, tzinfo=get_default_timezone()),
+        datetime.datetime(2017, 11, 27, tzinfo=get_default_timezone()),
+    ),
+]
+
+
+class UserBadge(CleanOnSaveMixin, models.Model):
+    badge = models.CharField(
+        choices=[b[:2] for b in BADGES],
+        max_length=max((len(b[0]) for b in BADGES)),
+    )
+    user = models.ForeignKey(TwitterUser)
+
+    @reify
+    def badge_info(self):
+        badge, = (b for b in BADGES if b[0] == self.badge)
+        return badge.info(self.user)
+
+    class Meta:
+        unique_together = [['badge', 'user']]

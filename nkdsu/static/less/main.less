@@ -15,7 +15,7 @@ html {
 }
 
 body {
-  font-family: "Bitter", "Calibri", serif;
+  font-family: "Bitter", "Calibri", sans-serif;
   background-color: @bg;
   .noise();
   color: @fg;
@@ -104,7 +104,7 @@ body {
     main {
       display: block;
       margin: 0 auto;
-      max-width: 50em;
+      max-width: @max-width;
       min-width: 200px;
       padding: 1em;
       position: relative;
@@ -153,9 +153,26 @@ body {
           border-radius: .4em;
         }
 
-
         &.abuser .avatar img {
           .transform(rotate(180deg));
+        }
+
+        .badges {
+          text-align: center;
+          margin: .5em 0;
+
+          li {
+            padding: .5em 0;
+
+            i, p {
+              margin-bottom: .3em;
+            }
+
+            i.fa {
+              color: @badge-colour;
+              font-size: 1.5em;
+            }
+          }
         }
 
         .user-votes {
@@ -176,7 +193,9 @@ body {
 
         .summary {
           text-align: right;
-          width: 67%;
+          width: 67% !important;
+          overflow: hidden;
+          text-overflow: ellipsis;
 
           img {
             border-radius: .4em;
@@ -191,6 +210,7 @@ body {
         @media (max-width: @breakpoint) {
           .summary {
             width: 80%;
+            max-width: 70vw !important;
           }
 
           .value {
@@ -204,6 +224,12 @@ body {
 
         tr.stat {
           td.summary {
+            max-width: 60vw;
+
+            @media (min-width: @max-width) {
+              max-width: 6*(@max-width/10);
+            }
+
             img {
               float: right;
               margin-left: 1em;
@@ -213,6 +239,8 @@ body {
 
             p {
               font-size: .9em;
+              overflow: hidden;
+              text-overflow: ellipsis;
 
               &.name, &.title {
                 font-size: 1.2em;
@@ -400,7 +428,7 @@ header {
         border: none;
         outline: none;
         height: 1.5em;
-        font-family: "Bitter", "Calibri", serif;
+        font-family: "Bitter", "Calibri", sans-serif;
         padding: .1em .3em;
         font-size: 1.1em;
       }
@@ -455,6 +483,36 @@ form ul.errorlist li {
   color: @light;
   position: relative;
   top: .6em;
+}
+
+/* library updates */
+
+.changes {
+  > li {
+    p {
+      margin-left: 1em;
+
+      &.title {
+        margin-left: 0;
+      }
+    }
+
+    margin-bottom: 1em;
+
+    ul.diff {
+      li {
+        code {
+          display: inline-block;
+          color: @pink;
+          background-color: fade(@pink, 10%);
+          padding: 0 .2em;
+          border-radius: .2em;
+        }
+
+        margin: .3em 0 .7em;
+      }
+    }
+  }
 }
 
 /* trivia */

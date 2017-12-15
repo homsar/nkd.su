@@ -1,5 +1,7 @@
 # coding: utf-8
 
+import os
+
 import plistlib
 
 from django.contrib.auth.decorators import login_required
@@ -62,12 +64,26 @@ class AdminActionMixin(AdminMixin):
 
         return self.url
 
+    def get_ajax_success_message(self):
+        self.object = self.get_object()
+        context = self.get_context_data()
+        context.update({
+            'track': self.object,
+            'cache_invalidator': os.urandom(16),
+        })
+        return TemplateResponse(
+            self.request, 'include/track.html',
+            context,
+        )
+
     def do_thing_and_redirect(self):
         try:
             self.do_thing()
         except ValidationError as e:
             return self.handle_validation_error(e)
         else:
+            if self.request.GET.get('ajax'):
+                return self.get_ajax_success_message()
             return redirect(self.get_redirect_url())
 
 
@@ -317,6 +333,8 @@ class LibraryUploadConfirmView(DestructiveAdminAction, TemplateView):
     Update the library.
     """
 
+    template_name = 'library_update.html'
+
     def update_library(self, dry_run):
         library_update = self.request.session['library_update']
         return update_library(
@@ -327,7 +345,7 @@ class LibraryUploadConfirmView(DestructiveAdminAction, TemplateView):
         )
 
     def get_deets(self):
-        return '\n\n'.join(self.update_library(dry_run=True))
+        return self.update_library(dry_run=True)
 
     def do_thing(self):
         changes = self.update_library(dry_run=False)
@@ -460,3 +478,14 @@ class RemoveNote(DestructiveAdminAction, DetailView):
     def do_thing(self):
         self.get_object().delete()
         messages.success(self.request, 'note removed')
+
+
+class AllAnimeView(View):
+    def get(self, request):
+        names = set(
+            (t.role_detail.get('anime', '') for t in Track.objects.all())
+        )
+        return HttpResponse(
+            '\n'.join(sorted(names, key=lambda n: n.lower())),
+            content_type='text/plain; charset=utf-8',
+        )

@@ -3,6 +3,10 @@
 @metadata-width: 60%;
 @new-compensation: 2.7em;
 
+.heavy-glow(@color) {
+  text-shadow: @color 0 0 .2em, @color 0 0 .2em, @color 0 0 .2em, @color 0 0 .2em;
+}
+
 .tinytrack() {
   display: block;
 
@@ -155,8 +159,10 @@
       border-color: #222;
     }
 
-    .vote.content::after {
-      text-shadow: @inv_bg -.15em 0 .1em, @inv_bg 0 -.15em .1em !important;
+    .vote {
+      &::after, .hat {
+        .heavy-glow(@inv_bg) !important;
+      }
     }
 
     &.inudesu {
@@ -247,6 +253,14 @@ body.tracks-expanded li.vote {
   margin-bottom: 1em;
   clear: both;
 
+  .hat {
+    display: none;
+  }
+
+  .hat-info .fa {
+    color: @badge-colour;
+  }
+
   .avatar {
     float: right;
     margin-left: .5em;
@@ -327,25 +341,12 @@ body.tracks-collapsed li.vote {
           color: #666;
         }
 
-        .text {
+        .text, .hat-info {
           clear: both;
           text-align: center;
           word-wrap: break-word;
           overflow: hidden;
           position: relative;
-
-          &::before {
-            font-family: FontAwesome;
-            content: @fa-var-comment;
-            display: block;
-            margin: 0 auto;
-            width: 2.5em;
-            padding: .2em 0;
-            position: relative;
-            z-index: 3;
-            background-color: @bg;
-            .noise();
-          }
 
           &::after {
             content: ' ';
@@ -357,6 +358,38 @@ body.tracks-collapsed li.vote {
             top: 0.7em;
             left: 10%;
             z-index: 2;
+          }
+        }
+
+        .text::before, .hat-info i {
+          display: block;
+          margin: 0 auto;
+          width: 2.5em;
+          padding: .2em 0;
+          position: relative;
+          z-index: 3;
+          background-color: @bg;
+          .noise();
+        }
+
+        .text {
+          &::before {
+            font-family: FontAwesome;
+            content: @fa-var-comment;
+          }
+        }
+
+        .hat-info {
+          margin-top: .1em;
+          font-size: .8em;
+
+          i {
+            color: @badge-colour;
+          }
+
+          &::after {
+            width: 60% !important;
+            left: 20% !important;
           }
         }
       }
@@ -377,7 +410,7 @@ body.tracks-collapsed li.vote {
     }
   }
 
-  &::before, &::after {
+  &::before, &::after, .hat {
     pointer-events: none;
     .fa;
     display: block;
@@ -389,8 +422,25 @@ body.tracks-collapsed li.vote {
       content: @fa-var-comment;
       bottom: -.1em;
       right: -.1em;
-      text-shadow: @bg -.15em 0 .1em, @bg 0 -.15em .1em;
+      .heavy-glow(@bg);
     }
+
+    &.birthday {
+      &::after {
+        content: @fa-var-birthday-cake;
+      }
+
+      .deets .text::before {
+        content: @fa-var-birthday-cake !important;
+      }
+    }
+  }
+
+  .hat {
+    color: @badge-colour;
+    top: -.1em;
+    right: -.1em;
+    .heavy-glow(@bg);
   }
 
   &.abuser {

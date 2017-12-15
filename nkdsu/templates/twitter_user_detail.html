@@ -45,6 +45,21 @@
       <p class="subheading">requests will still appear on tracks, but will not influence their position on the front page.</p>
     {% endif %}
 
+    {% if voter.userbadge_set.all %}
+      <ul class="badges">
+        {% for badge in voter.userbadge_set.all %}
+          <li>
+            <i class="fa fa-{{ badge.badge_info.icon }}"></i>
+
+            <p>{{ badge.badge_info.description }}</p>
+
+            {% if badge.badge_info.url %}
+              <p><a href="{{ badge.badge_info.url }}">More info&hellip;</a></p>
+            {% endif %}
+          </li>
+        {% endfor %}
+      </ul>
+    {% endif %}
   </div>
 
   <h2>requests</h2>

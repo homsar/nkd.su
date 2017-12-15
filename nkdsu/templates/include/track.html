@@ -1,7 +1,7 @@
 {% load vote_tags %}
 {% load cache %}
 
-{% cache 20 track track.pk vote_show.pk user.is_authenticated %}
+{% cache 20 track track.pk vote_show.pk user.is_authenticated cache_invalidator %}
   <li class="track
     {% if track.eligible %}
       eligible
@@ -41,7 +41,13 @@
 
       <p class="meta">
         {% if track.role %}
-          <span class="role">{{ track.role }}</span>
+          <span class="role">
+            {% if track.role_detail.role %}
+              <a href="{% url "vote:anime" anime=track.role_detail.anime %}">{{ track.role_detail.anime }}</a> {{ track.role_detail.role }}
+            {% else %}
+              {{ track.role }}
+            {% endif %}
+          </span>
         {% endif %}
 
         {% if track.last_play %}
@@ -84,7 +90,7 @@
             <span><a href="{% url "vote:admin:unblock" pk=track.pk %}">unblock</a></span>
           {% elif track.eligible %}
             <span><a href="{% url "vote:admin:block" pk=track.pk %}">block</a></span>
-            <span><a href="{% url "vote:admin:block_with_reason" pk=track.pk %}?reason=announced">announce</a></span>
+            <span><a class="ajaxable" href="{% url "vote:admin:block_with_reason" pk=track.pk %}?reason=announced">announce</a></span>
           {% endif %}
         </p>
         <p class="admin">
@@ -94,10 +100,10 @@
             <span><a href="{% url "vote:admin:hide" pk=track.pk %}">hide</a></span>
           {% endif %}
           {% if track in current_show.discarded or track in current_show.shortlisted %}
-            <span><a href="{% url "vote:admin:reset" pk=track.pk %}">reset shortlist/discard</a></span>
+            <span><a class="ajaxable" href="{% url "vote:admin:reset" pk=track.pk %}">reset shortlist/discard</a></span>
           {% else %}
-            <span><a href="{% url "vote:admin:shortlist" pk=track.pk %}">shortlist</a></span>
-            <span><a href="{% url "vote:admin:discard" pk=track.pk %}">discard</a></span>
+            <span><a class="ajaxable" href="{% url "vote:admin:shortlist" pk=track.pk %}">shortlist</a></span>
+            <span><a class="ajaxable" href="{% url "vote:admin:discard" pk=track.pk %}">discard</a></span>
           {% endif %}
           <span><a href="{% url "vote:admin:make_note" pk=track.pk %}">add note</a></span>
         </p>

@@ -11,6 +11,9 @@ admin_patterns = patterns(
     url(r'^upload/confirm/$',
         admin.LibraryUploadConfirmView.as_view(), name='confirm_upload'),
 
+    url(r'^all-the-anime/$',
+        admin.AllAnimeView.as_view(), name='all_anime'),
+
     url(r'^play/(?P<pk>.+)/$', admin.Play.as_view(), name='play'),
 
     url(r'^add-manual-vote/(?P<pk>.+)/$',
@@ -102,7 +105,7 @@ urlpatterns = patterns(
     url(r'^added/(?P<date>[\d-]+)/$', views.Added.as_view(), name='added'),
     url(r'^added/$', views.Added.as_view(), name='added'),
 
-    url(r'^roulette/(?P<mode>indiscriminate|hipster)/$',
+    url(r'^roulette/(?P<mode>indiscriminate|hipster|almost-100)/$',
         views.Roulette.as_view(), name='roulette'),
     url(r'^roulette/$', views.Roulette.as_view(), name='roulette'),
 
@@ -114,6 +117,7 @@ urlpatterns = patterns(
         name='avatar'),
 
     url(r'^artist/(?P<artist>.+)/$', views.Artist.as_view(), name='artist'),
+    url(r'^anime/(?P<anime>.+)/$', views.Anime.as_view(), name='anime'),
 
     url(r'^stats/$', views.Stats.as_view(), name='stats'),
 

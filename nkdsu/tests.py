@@ -28,6 +28,7 @@ class EverythingTest(
         '/vote-admin/add-manual-vote/0007C3F2760E0541/',
         '/vote-admin/upload/',
         '/vote-admin/trivia/',
+        '/vote-admin/all-the-anime/',
         '/vote-admin/play/0007C3F2760E0541/',
 
         '/js/deselect/',
@@ -56,6 +57,7 @@ class EverythingTest(
         '/canpeki-shinakya/0007C3F2760E0541/',
         '/0007C3F2760E0541/report/',
         '/artist/Hikasa Youko/',
+        '/anime/RO-KYU-BU%21/',
         '/show/2014-02-05/',
         '/show/',
         '/added/2014-02-05/',

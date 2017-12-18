@@ -15,7 +15,7 @@ from django.utils import timezone
 from django.views.generic import (DetailView, CreateView, View, FormView,
                                   TemplateView, ListView)
 from django.views.generic.base import TemplateResponseMixin
-from django.utils.translation import gettext_lazy as _
+from django.utils.translation import ugettext_lazy as _
 
 from ..forms import LibraryUploadForm, NoteForm
 from ..models import Track, Vote, Block, Show, TwitterUser, Request, Note

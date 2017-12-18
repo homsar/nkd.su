@@ -11,7 +11,7 @@ from django.utils import timezone
 from django.conf import settings
 from django.core.mail import send_mail
 from django.views.generic import TemplateView, ListView, DetailView, FormView
-from django.utils.translation import gettext_lazy as _
+from django.utils.translation import ugettext_lazy as _
 
 from ..forms import RequestForm, BadMetadataForm
 from ...vote import mixins

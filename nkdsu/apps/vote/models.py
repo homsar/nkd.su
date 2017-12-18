@@ -25,7 +25,7 @@ from django.core.exceptions import ValidationError
 from django.core.urlresolvers import reverse
 from django.templatetags.static import static
 from django.utils.timezone import get_default_timezone
-from django.utils.translation import gettext_lazy as _
+from django.utils.translation import ugettext_lazy as _
 
 from .managers import TrackManager, NoteManager
 from .utils import (

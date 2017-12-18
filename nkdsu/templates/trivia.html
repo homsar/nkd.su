@@ -1,8 +1,9 @@
 {% extends parent %}
 {% load vote_tags %}
+{% load i18n %}
 
 {% block content %}
-<h2>bad trivia</h2>
+<h2>{% trans "bad trivia" %}</h2>
 <div id="trivia">
   {% for request in requests %}
     <div class="trivia{% if request.successful %} successful{% endif %}">

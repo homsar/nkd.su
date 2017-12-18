@@ -1,7 +1,8 @@
 {% extends parent %}
+{% load i18n %}
 
 {% block content %}
-  <h2 class="message">Report bad metadata</h2>
+  <h2 class="message">{% trans "Report bad metadata" %}</h2>
   <p class=subheading><a href="{{ track.get_absolute_url }}">{{ track.title }}</a></p>
 
   <form class="reqeust" method="post" enctype="multipart/form-data" action=".">

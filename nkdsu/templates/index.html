@@ -1,5 +1,6 @@
 {% extends parent %}
 {% load vote_tags %}
+{% load i18n %}
   
 {% block content %}
 
@@ -28,7 +29,7 @@
     {% endif %}
   >
     {% if user.is_authenticated and show.shortlisted %}
-      <h2>shortlist</h2>
+      <h2>{% trans "shortlist" %}</h2>
       <p class="subheading">{{ show.shortlisted|total_length }}</p>
       <ul class="tracks" id="shortlist">
         {% for track in show.shortlisted %}
@@ -44,19 +45,22 @@
       </ul>
 
       {% if show.voting_allowed %}
-        <p class="aside">Want to vote for something else?</p>
+        <p class="aside">{% trans "Want to vote for something else?" %}</p>
       {% endif %}
 
     {% elif show.voting_allowed %}
-      <h2 class="message">No requests yet</h2>
+      <h2 class="message">{% trans "No requests yet" %}</h2>
 
     {% else %}
-      <h2 class="message">We're not taking requests this week, sorry</h2>
-      <p class="aside">Don't worry, your <a href="{% url "vote:stats" %}#most-dedicated-users">impressive streaks</a> will not be considered broken, as long as you're back next week.</p>
+      <h2 class="message">{% trans "We're not taking requests this week, sorry" %}</h2>
+      {% url "vote:stats" as stats_url %}
+      <p class="aside">{% blocktrans %}Don't worry, your <a href="{{ stats_url }}#most-dedicated-users">impressive streaks</a> will not be considered broken, as long as you're back next week.{% endblocktrans %}</p>
     {% endif %}
 
     {% if show.voting_allowed %}
-      <p class="aside">Search, browse the <a href="{% url "vote:archive" %}">playlist archive</a> or just <a href="{% url "vote:roulette" %}">throw darts at the wall</a>.</p>
+      {% url "vote:archive" as archive_url %}
+      {% url "vote:roulette" as roulette_url %}
+      <p class="aside">{% blocktrans %}Search, browse the <a href="{{ archive_url }}">playlist archive</a> or just <a href="{{ roulette_url }}">throw darts at the wall</a>.{% endblocktrans %}</p>
     {% endif %}
 
     {% if user.is_authenticated and show.discarded %}
@@ -81,7 +85,7 @@
           update: function(e, ui) {
             $.post(shortlistOrderURL, s.sortable("serialize", {attribute: 'data-shortlist-pk'}), function(data) {
               if (data === 'reload') {
-                alert("You've added stuff to the shortlist since you last loaded the front page. Please reload before making any more changes.");
+                alert("{% blocktrans %}You've added stuff to the shortlist since you last loaded the front page. Please reload before making any more changes.{% endblocktrans %}");
               }
             });
           }

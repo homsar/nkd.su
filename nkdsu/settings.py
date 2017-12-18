@@ -96,8 +96,8 @@ CACHES = {
 TIME_ZONE = 'Europe/London'
 LANGUAGE_CODE = 'en-gb'
 SITE_ID = 1
-USE_I18N = False
-USE_L10N = False
+USE_I18N = True
+USE_L10N = True
 USE_TZ = True
 
 # these URLs will not work when DEBUG is False; set up your webserver to serve
@@ -133,6 +133,11 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
+)
+
+LOCALE_PATHS = (
+    'nkdsu/locale',
 )
 
 ROOT_URLCONF = 'nkdsu.urls'

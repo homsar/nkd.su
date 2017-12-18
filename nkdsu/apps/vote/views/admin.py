@@ -15,6 +15,7 @@ from django.utils import timezone
 from django.views.generic import (DetailView, CreateView, View, FormView,
                                   TemplateView, ListView)
 from django.views.generic.base import TemplateResponseMixin
+from django.utils.translation import gettext_lazy as _
 
 from ..forms import LibraryUploadForm, NoteForm
 from ..models import Track, Vote, Block, Show, TwitterUser, Request, Note
@@ -146,7 +147,7 @@ class SelectionAdminAction(AdminAction, View):
 
         count = self.get_queryset().count()
         tracks = (
-            u'{} track' if count == 1 else u'{} tracks'
+            _(u'{} track') if count == 1 else _(u'{} tracks')
         ).format(count)
         messages.success(self.request, self.fmt.format(tracks))
 
@@ -174,7 +175,7 @@ class Hide(AdminAction, DetailView):
     def do_thing(self):
         self.get_object().hide()
         messages.success(self.request,
-                         u"'{}' hidden".format(self.get_object().title))
+                         _(u"'{}' hidden").format(self.get_object().title))
 
 
 class Unhide(AdminAction, DetailView):
@@ -183,7 +184,7 @@ class Unhide(AdminAction, DetailView):
     def do_thing(self):
         self.get_object().unhide()
         messages.success(self.request,
-                         u"'{}' unhidden".format(self.get_object().title))
+                         _(u"'{}' unhidden").format(self.get_object().title))
 
 
 class ManualVote(TrackSpecificAdminMixin, CreateView):
@@ -198,7 +199,7 @@ class ManualVote(TrackSpecificAdminMixin, CreateView):
         vote.save()
         vote.tracks.add(track)
         vote.save()
-        messages.success(self.request, 'vote added')
+        messages.success(self.request, _('vote added'))
         return redirect(reverse('vote:index'))
 
 
@@ -234,7 +235,7 @@ class Unblock(AdminAction, DetailView):
         block = get_object_or_404(Block, track=self.get_object(),
                                   show=Show.current())
         messages.success(self.request,
-                         u"'{}' unblocked".format(self.get_object().title))
+                         _(u"'{}' unblocked").format(self.get_object().title))
         block.delete()
 
 
@@ -252,7 +253,7 @@ class MakeBlockWithReason(AdminAction, DetailView):
             show=Show.current(),
         ).save()
         messages.success(self.request,
-                         u"'{}' blocked".format(self.get_object().title))
+                         _(u"'{}' blocked").format(self.get_object().title))
 
 
 class MakeShortlist(AdminAction, DetailView):
@@ -265,7 +266,7 @@ class MakeShortlist(AdminAction, DetailView):
     def do_thing(self):
         self.get_object().shortlist()
         messages.success(self.request,
-                         u"'{}' shortlisted".format(self.get_object().title))
+                         _(u"'{}' shortlisted").format(self.get_object().title))
 
 
 class MakeDiscard(AdminAction, DetailView):
@@ -278,7 +279,7 @@ class MakeDiscard(AdminAction, DetailView):
     def do_thing(self):
         self.get_object().discard()
         messages.success(self.request,
-                         u"'{}' discarded".format(self.get_object().title))
+                         _(u"'{}' discarded").format(self.get_object().title))
 
 
 class OrderShortlist(AdminMixin, JSApiMixin, View):
@@ -312,7 +313,7 @@ class ResetShortlistAndDiscard(AdminAction, DetailView):
     def do_thing(self):
         self.get_object().reset_shortlist_discard()
         messages.success(self.request,
-                         u"'{}' reset".format(self.get_object().title))
+                         _(u"'{}' reset").format(self.get_object().title))
 
 
 class LibraryUploadView(AdminMixin, FormView):
@@ -349,7 +350,7 @@ class LibraryUploadConfirmView(DestructiveAdminAction, TemplateView):
 
     def do_thing(self):
         changes = self.update_library(dry_run=False)
-        messages.success(self.request, 'library updated')
+        messages.success(self.request, _('library updated'))
         return changes
 
 
@@ -362,7 +363,7 @@ class ToggleAbuser(AdminAction, DetailView):
     def do_thing(self):
         user = self.get_object()
         user.is_abuser = not user.is_abuser
-        fmt = u"{} condemned" if user.is_abuser else u"{} redeemed"
+        fmt = _(u"{} condemned") if user.is_abuser else _(u"{} redeemed")
         messages.success(self.request, fmt.format(self.get_object()))
         user.save()
 
@@ -405,7 +406,7 @@ class BadTrivia(AdminMixin, ListView):
 
 
 class ShortlistSelection(SelectionAdminAction):
-    fmt = u'{} shortlisted'
+    fmt = _(u'{} shortlisted')
 
     def do_thing(self):
         for track in self.get_queryset():
@@ -413,7 +414,7 @@ class ShortlistSelection(SelectionAdminAction):
 
 
 class HideSelection(SelectionAdminAction):
-    fmt = u'{} hidden'
+    fmt = _(u'{} hidden')
 
     def do_thing(self):
         for track in self.get_queryset():
@@ -421,7 +422,7 @@ class HideSelection(SelectionAdminAction):
 
 
 class UnhideSelection(SelectionAdminAction):
-    fmt = u'{} unhidden'
+    fmt = _(u'{} unhidden')
 
     def do_thing(self):
         for track in self.get_queryset():
@@ -429,7 +430,7 @@ class UnhideSelection(SelectionAdminAction):
 
 
 class DiscardSelection(SelectionAdminAction):
-    fmt = u'{} discarded'
+    fmt = _(u'{} discarded')
 
     def do_thing(self):
         for track in self.get_queryset():
@@ -437,7 +438,7 @@ class DiscardSelection(SelectionAdminAction):
 
 
 class ResetShortlistAndDiscardSelection(SelectionAdminAction):
-    fmt = u'{} reset'
+    fmt = _(u'{} reset')
 
     def do_thing(self):
         for track in self.get_queryset():
@@ -477,7 +478,7 @@ class RemoveNote(DestructiveAdminAction, DetailView):
 
     def do_thing(self):
         self.get_object().delete()
-        messages.success(self.request, 'note removed')
+        messages.success(self.request, _('note removed'))
 
 
 class AllAnimeView(View):

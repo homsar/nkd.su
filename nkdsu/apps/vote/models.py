@@ -25,7 +25,7 @@ from django.core.exceptions import ValidationError
 from django.core.urlresolvers import reverse
 from django.templatetags.static import static
 from django.utils.timezone import get_default_timezone
-
+from django.utils.translation import gettext_lazy as _
 
 from .managers import TrackManager, NoteManager
 from .utils import (
@@ -68,14 +68,14 @@ class Show(CleanOnSaveMixin, models.Model):
     def clean(self):
         if self.end < self.showtime:
             raise ValidationError(
-                'Show ends before it begins; {end} < {start}'.format(
+                _('Show ends before it begins; {end} < {start}').format(
                     end=self.end, start=self.showtime))
         overlap = Show.objects.exclude(pk=self.pk).filter(
             showtime__lt=self.end,
             end__gt=self.showtime)
         if overlap.exists():
             raise ValidationError(
-                '{self} overlaps existing shows: {overlap}'.format(
+                _('{self} overlaps existing shows: {overlap}').format(
                     self=self, overlap=overlap))
 
     @classmethod
@@ -514,8 +514,8 @@ class Track(CleanOnSaveMixin, models.Model):
 
     def clean(self):
         if (not self.inudesu) and (not self.hidden) and (not self.revealed):
-            raise ValidationError('{track} is not hidden but has no revealed '
-                                  'date'.format(track=self))
+            raise ValidationError(_('{track} is not hidden but has no '
+                                  'revealed date').format(track=self))
 
     @memoize
     def is_new(self):
@@ -643,21 +643,21 @@ class Track(CleanOnSaveMixin, models.Model):
         """
 
         if self.inudesu:
-            return 'inu desu'
+            return _('inu desu')
 
         if self.hidden:
-            return 'hidden'
+            return _('hidden')
 
         current_show = Show.current()
 
         if not current_show.voting_allowed:
-            return 'no requests allowed this week'
+            return _('no requests allowed this week')
 
         if self.play_set.filter(show=current_show).exists():
-            return 'played this week'
+            return _('played this week')
 
         if self.play_set.filter(show=current_show.prev()).exists():
-            return 'played last week'
+            return _('played last week')
 
         block_qs = current_show.block_set.filter(track=self)
 
@@ -906,11 +906,11 @@ class Track(CleanOnSaveMixin, models.Model):
 
 
 MANUAL_VOTE_KINDS = (
-    ('email', 'email'),
-    ('text', 'text'),
-    ('tweet', 'tweet'),
-    ('person', 'in person'),
-    ('phone', 'on the phone'),
+    ('email', _('email')),
+    ('text', _('text')),
+    ('tweet', _('tweet')),
+    ('person', _('in person')),
+    ('phone', _('on the phone')),
 )
 
 
@@ -1021,17 +1021,17 @@ class Vote(SetShowBasedOnDateMixin, CleanOnSaveMixin, models.Model):
         if self.is_manual:
             if self.tweet_id or self.twitter_user_id:
                 raise ValidationError(
-                    'Twitter attributes present on manual vote')
+                    _('Twitter attributes present on manual vote'))
             if not (self.name and self.kind):
                 raise ValidationError(
-                    'Attributes missing from manual vote')
+                    _('Attributes missing from manual vote'))
         else:
             if self.name or self.kind:
                 raise ValidationError(
-                    'Manual attributes present on Twitter vote')
+                    _('Manual attributes present on Twitter vote'))
             if not (self.tweet_id and self.twitter_user_id):
                 raise ValidationError(
-                    'Twitter attributes missing from Twitter vote')
+                    _('Twitter attributes missing from Twitter vote'))
 
     def either_name(self):
         return self.name or '@{0}'.format(self.twitter_user.screen_name)
@@ -1086,7 +1086,7 @@ class Vote(SetShowBasedOnDateMixin, CleanOnSaveMixin, models.Model):
         content = self.content()
         return (
             content and
-            re.search(r'\b(birthday|bday)\b', content, flags=re.IGNORECASE)
+            re.search(r'\b(birthday|bday|誕生日)\b', content, flags=re.IGNORECASE)
         )
 
     @reify
@@ -1179,7 +1179,7 @@ class Play(SetShowBasedOnDateMixin, CleanOnSaveMixin, models.Model):
         for play in self.show.play_set.all():
             if play != self and play.track == self.track:
                 raise ValidationError(
-                    '{track} already played during {show}.'.format(
+                    _('{track} already played during {show}.').format(
                         track=self.track, show=self.show,
                     )
                 )
@@ -1198,7 +1198,7 @@ class Play(SetShowBasedOnDateMixin, CleanOnSaveMixin, models.Model):
         """
 
         if self.tweet_id is not None:
-            raise TypeError('This play has already been tweeted')
+            raise TypeError(_('This play has already been tweeted'))
 
         canon = unicode(self.track)
         hashtag = settings.HASHTAG
@@ -1324,8 +1324,8 @@ class Badge(tuple):
 BADGES = [
     Badge(
         'tblc',
-        u'{user.name} bought Take Back Love City for the RSPCA.',
-        'put up with bad music for animals',
+        _(u'{user.name} bought Take Back Love City for the RSPCA.'),
+        _('put up with bad music for animals'),
         'headphones',
         'https://desus.bandcamp.com/album/take-back-love-city',
         None,
@@ -1333,9 +1333,9 @@ BADGES = [
     ),
     Badge(
         'charity-2016',
-        u'{user.name} donated to the Very Scary Scenario charity streams for '
-        u'Special Effect in 2016.',
-        'likes fun, hates exclusion',
+        _(u'{user.name} donated to the Very Scary Scenario charity streams for '
+          u'Special Effect in 2016.'),
+        _('likes fun, hates exclusion'),
         'heart',
         'https://www.justgiving.com/fundraising/very-scary-scenario',
         datetime.datetime(2016, 10, 15, tzinfo=get_default_timezone()),
@@ -1343,9 +1343,9 @@ BADGES = [
     ),
     Badge(
         'charity-2017',
-        u'{user.name} donated to the Very Scary Scenario charity streams and '
-        u'Neko Desu All-Nighter for Cancer Research UK in 2017.',
-        'likes depriving people of sleep, hates cancer',
+        _(u'{user.name} donated to the Very Scary Scenario charity streams and '
+          u'Neko Desu All-Nighter for Cancer Research UK in 2017.'),
+        _('likes depriving people of sleep, hates cancer'),
         'heart',
         'https://www.justgiving.com/fundraising/very-charity-scenario-2017',
         datetime.datetime(2017, 10, 1, tzinfo=get_default_timezone()),

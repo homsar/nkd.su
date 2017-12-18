@@ -1,26 +1,32 @@
+{% load i18n %}
+
 {% if page_obj.has_other_pages %}
   <div class="paginator">
     <p class="pages">
       {% if page_obj.has_previous %}
-        <a href="?{% if query %}q={{ query|urlencode }}&amp;{% endif %}page={{ page_obj.previous_page_number }}">« prev</a>
+        <a href="?{% if query %}q={{ query|urlencode }}&amp;{% endif %}page={{ page_obj.previous_page_number }}">« {% trans "prev" %}</a>
       {% else %}
-        <span class="unavailable">« prev</span>
+        <span class="unavailable">« {% trans "prev" %}</span>
       {% endif %}
 
       <span class="counts">
-        <span class="count current">{{ page_obj.number }}</span> of <span class="count">{{ page_obj.paginator.num_pages }}</span>
+        {% blocktrans with number=page_obj.number num_pages=page_obj.paginator.num_pages %}
+          <span class="count current">{{ number }}</span> of <span class="count">{{ num_pages }}</span>
+        {% endblocktrans %}
       </span>
 
       {% if page_obj.has_next %}
-        <a href="?{% if query %}q={{ query|urlencode }}&amp;{% endif %}page={{ page_obj.next_page_number }}">next »</a>
+        <a href="?{% if query %}q={{ query|urlencode }}&amp;{% endif %}page={{ page_obj.next_page_number }}">{% trans "next" %} »</a>
       {% else %}
-        <span class="unavailable">next »</span>
+        <span class="unavailable">{% trans "next" %} »</span>
       {% endif %}
     </p>
 
     <p class="objects">
       <span class="counts">
-        <span class="count current">{{ page_obj.start_index }}-{{ page_obj.end_index }}</span> of <span>{{ page_obj.paginator.count }}</span>
+        {% blocktrans with start=page_obj.start_index end=page_obj.end_index count=page_obj.paginator.count %}
+          <span class="count current">{{ start }}-{{ end }}</span> of <span>{{ count }}</span>
+        {% endblocktrans %}
       </span>
     </p>
   </div>

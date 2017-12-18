@@ -1,17 +1,18 @@
 {% extends parent %}
 {% load cache %}
+{% load i18n %}
 
 {% block title %}stats{% endblock %}
 
 {% block content %}
   {% cache indefinitely stats current_show %}
     {% with batting_averages as ba %}
-      <h2 id="most-successful-users">most successful users</h2>
-      <p class="subheading">in the last six months</p>
+      <h2 id="most-successful-users">{% trans "most successful users" %}</h2>
+      <p class="subheading">{% trans "in the last six months" %}</p>
       <table class="stats users">
         <tr>
-          <th class="summary"><span>user</span></th>
-          <th class="value">batting average</th>
+          <th class="summary"><span>{% trans "user" %}</span></th>
+          <th class="value">{% trans "batting average" %}</th>
         </tr>
 
         {% for voter in ba|slice:":10" %}
@@ -19,12 +20,12 @@
         {% endfor %}
       </table>
 
-      <h2 id="least-successful-users">least successful users</h2>
-      <p class="subheading">in the last six months</p>
+      <h2 id="least-successful-users">{% trans "least successful users" %}</h2>
+      <p class="subheading">{% trans "in the last six months" %}</p>
       <table class="stats users">
         <tr>
-          <th class="summary"><span>user</span></th>
-          <th class="value">batting average</th>
+          <th class="summary"><span>{% trans "user" %}</span></th>
+          <th class="value">{% trans "batting average" %}</th>
         </tr>
 
         {% for voter in ba|slice:":-10:-1" %}
@@ -33,11 +34,11 @@
       </table>
     {% endwith %}
 
-    <h2 id="most-dedicated-users">most dedicated users</h2>
+    <h2 id="most-dedicated-users">{% trans "most dedicated users" %}</h2>
     <table class="stats users">
       <tr>
-        <th class="summary"><span>user</span></th>
-        <th class="value">current streak</th>
+        <th class="summary"><span>{% trans "user" %}</span></th>
+        <th class="value">{% trans "current streak" %}</th>
       </tr>
 
       {% for voter in streaks|slice:":10" %}
@@ -45,12 +46,12 @@
       {% endfor %}
     </table>
 
-    <h2 id="most-popular-tracks">most popular tracks</h2>
-    <p class="subheading">in the last six months</p>
+    <h2 id="most-popular-tracks">{% trans "most popular tracks" %}</h2>
+    <p class="subheading">{% trans "in the last six months" %}</p>
     <table class="stats tracks">
       <tr>
-        <th class="summary"><span>track</span></th>
-        <th class="value">votes</th>
+        <th class="summary"><span>{% trans "track" %}</span></th>
+        <th class="value">{% trans "votes" %}</th>
       </tr>
 
       {% for track, value in popular_tracks|slice:":10" %}

@@ -1,5 +1,6 @@
 {% extends parent %}
 {% load vote_tags %}
+{% load i18n %}
 
 {% block title %}{{ track.title }}{% endblock %}
 
@@ -16,21 +17,23 @@
   {% include "include/track.html" %}
 </ul>
 
-<p class="aside"><a href="{{ track.get_report_url }}">report bad metadata</a></p>
+<p class="aside"><a href="{{ track.get_report_url }}">{% trans "report bad metadata" %}</a></p>
 
-<p class="aside">added to the library on <a href="{{ track.show_revealed.get_revealed_url }}">{{ track.revealed|date:"F"|lower }}&nbsp;{{ track.revealed|date:"jS, Y" }}</a></p>
+<p class="aside">{% blocktrans with url=track.show_revealed.get_revealed_url date1=track.revealed|date:_("F")|lower date2=track.revealed|date:_("jS, Y") %}
+added to the library on <a href="{{ url }}">{{ date1 }}&nbsp;{{ date2 }}
+{% endblocktrans %}</a></p>
 
 {% if track.plays %}
-  <h3>play history</h3>
+  <h3>{% trans "play history" %}</h3>
   <ul class="plays">
     {% for play in track.plays %}
       <li>
-        <a href="{{ play.show.get_absolute_url }}">{{ play.date|date:"F"|lower }} {{ play.date|date:"jS, Y" }}</a>
+        <a href="{{ play.show.get_absolute_url }}">{{ play.date|date:_("F jS, Y")|lower }}</a>
       </li>
     {% endfor %}
   </ul>
 {% else %}
-  <p class="aside">no plays on record</p>
+  <p class="aside">{% trans "no plays on record" %}</p>
 {% endif %}
 
 {% endblock %}

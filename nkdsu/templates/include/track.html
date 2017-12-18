@@ -1,5 +1,6 @@
 {% load vote_tags %}
 {% load cache %}
+{% load i18n %}
 
 {% cache 20 track track.pk vote_show.pk user.is_authenticated cache_invalidator %}
   <li class="track
@@ -84,28 +85,28 @@
 
       {% if user.is_authenticated %}
         <p class="admin">
-          <span><a href="{% url "vote:admin:play" pk=track.pk %}">play</a></span>
-          <span><a href="{% url "vote:admin:manual_vote" pk=track.pk %}">manual vote</a></span>
+          <span><a href="{% url "vote:admin:play" pk=track.pk %}">{% trans "play" %}</a></span>
+          <span><a href="{% url "vote:admin:manual_vote" pk=track.pk %}">{% trans "manual vote" %}</a></span>
           {% if track.ineligible %}
-            <span><a href="{% url "vote:admin:unblock" pk=track.pk %}">unblock</a></span>
+            <span><a href="{% url "vote:admin:unblock" pk=track.pk %}">{% trans "unblock" %}</a></span>
           {% elif track.eligible %}
-            <span><a href="{% url "vote:admin:block" pk=track.pk %}">block</a></span>
-            <span><a class="ajaxable" href="{% url "vote:admin:block_with_reason" pk=track.pk %}?reason=announced">announce</a></span>
+            <span><a href="{% url "vote:admin:block" pk=track.pk %}">{% trans "block" %}</a></span>
+            <span><a class="ajaxable" href="{% url "vote:admin:block_with_reason" pk=track.pk %}?reason=announced">{% trans "announce" %}</a></span>
           {% endif %}
         </p>
         <p class="admin">
           {% if track.hidden %}
-            <span><a href="{% url "vote:admin:unhide" pk=track.pk %}">unhide</a></span>
+            <span><a href="{% url "vote:admin:unhide" pk=track.pk %}">{% trans "unhide" %}</a></span>
           {% else %}
-            <span><a href="{% url "vote:admin:hide" pk=track.pk %}">hide</a></span>
+            <span><a href="{% url "vote:admin:hide" pk=track.pk %}">{% trans "hide" %}</a></span>
           {% endif %}
           {% if track in current_show.discarded or track in current_show.shortlisted %}
-            <span><a class="ajaxable" href="{% url "vote:admin:reset" pk=track.pk %}">reset shortlist/discard</a></span>
+            <span><a class="ajaxable" href="{% url "vote:admin:reset" pk=track.pk %}">{% trans "reset shortlist/discard" %}</a></span>
           {% else %}
-            <span><a class="ajaxable" href="{% url "vote:admin:shortlist" pk=track.pk %}">shortlist</a></span>
-            <span><a class="ajaxable" href="{% url "vote:admin:discard" pk=track.pk %}">discard</a></span>
+            <span><a class="ajaxable" href="{% url "vote:admin:shortlist" pk=track.pk %}">{% trans "shortlist" %}</a></span>
+            <span><a class="ajaxable" href="{% url "vote:admin:discard" pk=track.pk %}">{% trans "discard" %}</a></span>
           {% endif %}
-          <span><a href="{% url "vote:admin:make_note" pk=track.pk %}">add note</a></span>
+          <span><a href="{% url "vote:admin:make_note" pk=track.pk %}">{% trans "add note" %}</a></span>
         </p>
       {% endif %}
     </div>
@@ -119,7 +120,7 @@
       </a></div>
     {% elif track.eligible %}
       <div class="invitation request"><a href="{{ track.get_vote_url }}">
-        request this song
+        {% trans "request this song"%}
       </a></div>
     {% else %}
       <div class="invitation request"></div>

@@ -11,6 +11,7 @@ from django.utils import timezone
 from django.conf import settings
 from django.core.mail import send_mail
 from django.views.generic import TemplateView, ListView, DetailView, FormView
+from django.utils.translation import gettext_lazy as _
 
 from ..forms import RequestForm, BadMetadataForm
 from ...vote import mixins
@@ -80,9 +81,9 @@ class Roulette(ListView):
     template_name = 'roulette.html'
     context_object_name = 'tracks'
     modes = [
-        ('hipster', 'hipster'),
-        ('indiscriminate', 'indiscriminate'),
-        ('almost-100', 'almost 100'),
+        ('hipster', _('hipster')),
+        ('indiscriminate', _('indiscriminate')),
+        ('almost-100', _('almost 100')),
     ]
 
     def get(self, request, *args, **kwargs):
@@ -159,7 +160,7 @@ class TwitterUserDetail(mixins.TwitterUserDetailMixin, DetailView):
         try:
             votes = paginator.page(self.request.GET.get('page', 1))
         except InvalidPage:
-            raise Http404('Not a page')
+            raise Http404(_('Not a page'))
 
         context.update({
             'votes': votes,
@@ -176,7 +177,7 @@ class TwitterAvatarView(mixins.TwitterUserDetailMixin, DetailView):
                 size=self.request.GET.get('size'))
         except tweepy.TweepError as e:
             if e.api_code == 50:
-                raise Http404('No such user :<')
+                raise Http404(_('No such user :<'))
             raise
 
         return HttpResponse(image, content_type=content_type)
@@ -191,7 +192,7 @@ class Artist(ListView):
         tracks = self.model.objects.by_artist(self.kwargs['artist'])
 
         if len(tracks) == 0:
-            raise Http404('No tracks for this artist')
+            raise Http404(_('No tracks for this artist'))
         else:
             return tracks
 
@@ -210,7 +211,7 @@ class Anime(ListView):
         tracks = self.model.objects.by_anime(self.kwargs['anime'])
 
         if len(tracks) == 0:
-            raise Http404('No tracks for this anime')
+            raise Http404(_('No tracks for this anime'))
         else:
             return tracks
 
@@ -319,9 +320,9 @@ class ReportBadMetadata(FormView):
 
         messages.success(
             self.request,
-            'Your disclosure is appreciated. '
-            'The metadata youkai has been dispatched to address your concerns.'
-            ' None will know of its passing.'
+            _('Your disclosure is appreciated. '
+              'The metadata youkai has been dispatched to address your concerns.'
+              ' None will know of its passing.')
         )
 
         return super(ReportBadMetadata, self).form_valid(form)
@@ -346,9 +347,9 @@ class RequestAddition(FormView):
 
         messages.success(
             self.request,
-            'Your request has been dispatched. '
-            'May it glide strong and true through spam filters and '
-            'indifference.'
+            _('Your request has been dispatched. '
+              'May it glide strong and true through spam filters and '
+              'indifference.')
         )
 
         return super(RequestAddition, self).form_valid(form)

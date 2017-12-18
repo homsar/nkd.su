@@ -1,4 +1,5 @@
 {% load vote_tags %}
+{% load i18n %}
 <li class="vote
   {% if vote.content %}content{% endif %}
   {% if vote.birthday %}birthday{% endif %}
@@ -21,7 +22,7 @@
 
       {% if vote.is_manual %}
         <p class="meta full_name">{{ vote.name }}</p>
-        <p class="meta kind">via {{ vote.kind }}</p>
+        <p class="meta kind">{% blocktrans with kind=vote.kind %}via {{ kind }}{% endblocktrans %}</p>
       {% else %}
         <p class="meta full_name">{{ vote.twitter_user.name }}</p>
         <p class="meta screen_name">@{{ vote.twitter_user.screen_name }}</p>

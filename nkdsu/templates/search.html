@@ -1,8 +1,9 @@
 {% extends parent %}
+{% load i18n %}
 
 {% block content %}
 
-  <h2>search results</h2>
+  <h2>{% trans "search results" %}</h2>
   <p class="subheading">{{ query }}</p>
 
   <ul class="tracks">
@@ -11,6 +12,6 @@
 
   {% include "include/paginator.html" %}
 
-  <p class="aligned everything">Can't find what you're looking for? <a href="{% url "vote:request_addition" %}?q={{ query|urlencode }}">Get it added to the library</a></p>
+  <p class="aligned everything">{% trans "Can't find what you're looking for?" %} <a href="{% url "vote:request_addition" %}?q={{ query|urlencode }}">{% trans "Get it added to the library" %}</a></p>
 
 {% endblock %}

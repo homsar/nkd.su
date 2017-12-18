@@ -1,3 +1,5 @@
+{% load i18n %}
+
 {% if messages %}
   <ul class="messages">
     {% for message in messages %}
@@ -11,11 +13,11 @@
     <div id="titles">
       <h1><a href="{% url "vote:index" %}">nkd.su</a></h1>
       {% if current_show.broadcasting %}
-        <p class="subtitle">on air! listen live at <a target="_blank" href="http://thisisthecat.com">the&nbsp;cat</a>
+        <p class="subtitle">{% blocktrans %}on air! listen live at <a target="_blank" href="http://thisisthecat.com">the&nbsp;cat</a>{% endblocktrans %}
       {% elif current_show %}
-        <p class="subtitle">next <a href="http://nekodesu.co.uk/">neko desu</a>: {{ current_show.showtime|date:"F"|lower }}&nbsp;{{ current_show.showtime|date:"jS" }}</p>
+        <p class="subtitle">{% blocktrans with date1=current_show.showtime|date:_("F")|lower date2=current_show.showtime|date:_("jS") %}next <a href="http://nekodesu.co.uk/">neko desu</a>: {{ date1 }}&nbsp;{{ date2 }}{% endblocktrans %}</p>
       {% else %}
-        <p class="subtitle">a neko desu request robot</p>
+        <p class="subtitle">{% trans "a neko desu request robot" %}</p>
       {% endif %}
     </div>
     <div id="search">

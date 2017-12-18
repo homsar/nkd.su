@@ -1,4 +1,5 @@
 from django.core.urlresolvers import reverse
+from django.utils.translation import gettext_lazy as _
 
 from .models import Show, Track
 from .utils import indefinitely
@@ -23,12 +24,12 @@ def get_sections(request):
         'url': section[1],
         'active': section[0] == active_section
     } for section in [
-        ('home', reverse('vote:index')),
-        ('archive', reverse('vote:archive')),
-        ('new tracks', most_recent_track.show_revealed().get_revealed_url()),
-        ('roulette', reverse('vote:roulette', kwargs={'mode': 'hipster'})),
-        ('stats', reverse('vote:stats')),
-        ('etc', 'http://nekodesu.co.uk/'),
+        (_('home'), reverse('vote:index')),
+        (_('archive'), reverse('vote:archive')),
+        (_('new tracks'), most_recent_track.show_revealed().get_revealed_url()),
+        (_('roulette'), reverse('vote:roulette', kwargs={'mode': 'hipster'})),
+        (_('stats'), reverse('vote:stats')),
+        (_('etc'), 'http://nekodesu.co.uk/'),
     ]]
 
 

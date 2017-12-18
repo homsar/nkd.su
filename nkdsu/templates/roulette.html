@@ -1,10 +1,11 @@
 {% extends parent %}
+{% load i18n %}
 
-{% block title %}{{ mode_name }} roulette{% endblock %}
+{% block title %}{% blocktrans %}{{ mode_name }} roulette{% endblocktrans %}{% endblock %}
 
 {% block content %}
 
-  <h2>roulette</h2>
+  <h2>{% trans "roulette" %}</h2>
   <p class="subheading roulette-mode-switch">
     {% for slug, name in modes %}
       <span>
@@ -21,6 +22,6 @@
     {% include "include/tracklist.html" %}
   </ul>
 
-  <p class="aside"><a href="{% url "vote:roulette" mode=mode %}">these are all terrible</a></p>
+  <p class="aside"><a href="{% url "vote:roulette" mode=mode %}">{% trans "these are all terrible" %}</a></p>
 
 {% endblock %}

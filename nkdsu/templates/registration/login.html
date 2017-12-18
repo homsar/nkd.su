@@ -1,12 +1,13 @@
 {% extends parent %}
+{% load i18n %}
 
-{% block title %}log in{% endblock %}
+{% block title %}{% trans "log in" %}{% endblock %}
 
 {% block content %}
-<h2 class=message>log in</h2>
+<h2 class=message>{% trans "log in" %}</h2>
 
 {% if form.errors %}
-<p class="aside problems">wrong username/password, sorry</p>
+<p class="aside problems">{% trans "wrong username/password, sorry" %}</p>
 {% endif %}
 
 <form class="login" method="post" action="{% url "django.contrib.auth.views.login" %}">

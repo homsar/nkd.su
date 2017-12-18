@@ -1,3 +1,4 @@
+{% load i18n %}
 {% load compressed static %}<!doctype html>
 <html>
   <head>
@@ -12,7 +13,7 @@
     {% compressed_css "main" %}
     <link rel="shortcut icon" href="{{ STATIC_URL }}favicon.ico" type="image/vnd.microsoft.icon">
     <title>
-      {% block title %}a neko desu request robot{% endblock %} | nkd.su
+      {% block title %}{% trans "a neko desu request robot" %}{% endblock %} | nkd.su
     </title>
 
     {% block twitter_card %}{% endblock %}

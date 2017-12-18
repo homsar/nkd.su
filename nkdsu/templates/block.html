@@ -1,9 +1,10 @@
 {% extends parent %}
+{% load i18n %}
 
-{% block title %}block {{ track.title }}{% endblock %}
+{% block title %}{% blocktrans with title=track.title %}block {{ title }}{% endblocktrans %}{% endblock %}
 
 {% block content %}
-  <h2 class=message>Block <a href="{{ track.get_absolute_url }}">{{ track.title }}</a></h2>
+  <h2 class=message>{% blocktrans with url=track.get_absolute_url title=track.title %}Block <a href="{{ url }}">{{ title }}</a>{% endblocktrans %}</h2>
   <p class="aside">{{ track.canonical_string }}</p>
 
   <form class="login" method="post" action=".">

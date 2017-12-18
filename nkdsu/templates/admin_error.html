@@ -1,9 +1,10 @@
 {% extends parent %}
+{% load i18n %}
 
 {% block title %}{{ action }}{% endblock %}
 {% block content %}
 
-<h2 class="aligned">Failed to {{ action|lower }} :&lt;</h2>
+<h2 class="aligned">{% blocktrans with action=action|lower %}Failed to {{ action }} :&lt;{% endblocktrans %}</h2>
 
 {% if deets %}
   {{ deets|linebreaks }}

@@ -1,29 +1,35 @@
 {% load vote_tags %}
+{% load i18n %}
+
 <div id="selhead">
   {% if selection %}
     <div class="stuck">
-      <h3>{{ selection|length }} song{{ selection|pluralize }} selected</h3>
+      <h3>{% blocktrans count length=selection|length %}
+      {{ selection|length }} song selected
+      {% plural %}
+      {{ selection|length }} songs selected
+      {% endblocktrans %}</h3>
       {% if user.is_authenticated %}
         <p class="actions">
-          <span><a href="{% url "vote:admin:shortlist_selection" %}">shortlist</a></span>
-          <span><a href="{% url "vote:admin:discard_selection" %}">discard</a></span>
-          <span><a href="{% url "vote:admin:reset_shortlist_discard_selection" %}">reset</a></span>
+          <span><a href="{% url "vote:admin:shortlist_selection" %}">{% trans "shortlist" %}</a></span>
+          <span><a href="{% url "vote:admin:discard_selection" %}">{% trans "discard" %}</a></span>
+          <span><a href="{% url "vote:admin:reset_shortlist_discard_selection" %}">{% trans "reset" %}</a></span>
         </p>
         <p class="actions">
-          <span><a href="{% url "vote:admin:hide_selection" %}">hide</a></span>
-          <span><a href="{% url "vote:admin:unhide_selection" %}">unhide</a></span>
+          <span><a href="{% url "vote:admin:hide_selection" %}">{% trans "hide" %}</a></span>
+          <span><a href="{% url "vote:admin:unhide_selection" %}">{% trans "unhide" %}</a></span>
         </p>
       {% else %}
         {% if vote_url %}
-          <p class="actions"><a class="mass_vote" href="{{ vote_url }}">vote for all</a></p>
+          <p class="actions"><a class="mass_vote" href="{{ vote_url }}">{% trans "vote for all" %}</a></p>
         {% else %}
-          <p class="refusal actions">too many tracks</p>
+          <p class="refusal actions">{% trans "too many tracks" %}</p>
         {% endif %}
       {% endif %}
       <p class="actions minor">
-        <span><a data-href="{% url "vote:js:clear_selection" %}" name="clear_selection">clear selection</a></span>
+        <span><a data-href="{% url "vote:js:clear_selection" %}" name="clear_selection">{% trans "clear selection" %}</a></span>
         {% if user.is_authenticated %}
-          <span><a class="select_all" data-href="{% url "vote:js:select" %}">select all</a></span>
+          <span><a class="select_all" data-href="{% url "vote:js:select" %}">{% trans "select all" %}</a></span>
         {% endif %}
       </p>
     </div> <!-- stuck -->
@@ -43,7 +49,7 @@
       </p>
       {% endif %}
     </div>
-    <p class="deselect"><a data-href="{% url "vote:js:clear_selection" %}">deselect</a></p>
+    <p class="deselect"><a data-href="{% url "vote:js:clear_selection" %}">{% trans "deselect" %}</a></p>
   </li>
 </ul>
 {% endfor %}

@@ -1,0 +1,1025 @@
+# nkd.su Japanese translation.
+# Copyright (C) 2017 Tachibana Kanade (@h0m54r)
+# This file is distributed under the same license as the PACKAGE package.
+# Tachibana Kanade <https://twitter.com/h0m54r, 2017.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-12-18 18:56+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n>10;\n"
+
+#: apps/vote/context_processors.py:27
+msgid "home"
+msgstr "ホーム"
+
+#: apps/vote/context_processors.py:28
+msgid "archive"
+msgstr "アーカイブ"
+
+#: apps/vote/context_processors.py:29
+msgid "new tracks"
+msgstr "新トラック"
+
+#: apps/vote/context_processors.py:30 templates/roulette.html:8
+msgid "roulette"
+msgstr "ルーレット"
+
+#: apps/vote/context_processors.py:31
+msgid "stats"
+msgstr "統計"
+
+#: apps/vote/context_processors.py:32
+msgid "etc"
+msgstr "他"
+
+#: apps/vote/forms.py:25
+msgid "Enter a valid email address or twitter username"
+msgstr "重厚なメールアドレスかツイッター名か入力して下さい"
+
+#: apps/vote/forms.py:31
+msgid "Enter a valid email address or Twitter username"
+msgstr "有効なメールアドレスかツイッター名か入力して下さい"
+
+#: apps/vote/forms.py:75
+msgid ""
+"That's not right, sorry. There are hints <a href='https://github.com/colons/"
+"nkd.su/blob/master/nkdsu/apps/vote/trivia.py'>here</a>."
+msgstr ""
+"すみません、それは違います。<a href=\"https://github.com/colons/nkd.su/blob/"
+"master/nkdsu/apps/vote/trivia.py\">ここ</a>にヒントが見つかれます。"
+
+#: apps/vote/forms.py:86
+msgid "What needs fixing?"
+msgstr "何が直して要りますか"
+
+#: apps/vote/forms.py:87
+msgid "Email/Twitter (not required)"
+msgstr "メールアドレス／ツイッター名（必要なし）"
+
+#: apps/vote/forms.py:94
+msgid "Source Anime"
+msgstr "元アニメ"
+
+#: apps/vote/forms.py:95
+msgid "Role (OP/ED/Insert/Character/etc.)"
+msgstr "役目（OP／ED／挿入歌／キャラクター／など)"
+
+#: apps/vote/forms.py:98
+msgid "Additional Details"
+msgstr "他の情報"
+
+#: apps/vote/forms.py:99
+msgid "Email Address/Twitter name"
+msgstr "メールアドレス／ツイッター名"
+
+#: apps/vote/forms.py:112
+msgid "I'm sure you can give us more information than that."
+msgstr "きっと、それ以上もっと情報を入力できます。"
+
+#: apps/vote/forms.py:118
+msgid "Library XML"
+msgstr "ライブラリXML"
+
+#: apps/vote/forms.py:119
+msgid "Inu Desu"
+msgstr "イヌデス"
+
+#: apps/vote/models.py:71
+#, python-brace-format
+msgid "Show ends before it begins; {end} < {start}"
+msgstr "番組は始まる前に終わります; {end} < {start}"
+
+#: apps/vote/models.py:78
+#, python-brace-format
+msgid "{self} overlaps existing shows: {overlap}"
+msgstr "「{self}」は重複しています: {overlap}"
+
+#: apps/vote/models.py:517
+#, python-brace-format
+msgid "{track} is not hidden but has no revealed date"
+msgstr "「{track}」は隠れていませんが、現れた月日がありません。"
+
+#: apps/vote/models.py:646 templates/include/post_content.html:10
+msgid "inu desu"
+msgstr "イヌデス"
+
+#: apps/vote/models.py:649
+msgid "hidden"
+msgstr "隠れている"
+
+#: apps/vote/models.py:654
+msgid "no requests allowed this week"
+msgstr "今週はリクエストができません"
+
+#: apps/vote/models.py:657
+msgid "played this week"
+msgstr "今週弾きました"
+
+#: apps/vote/models.py:660
+msgid "played last week"
+msgstr "先週弾きました"
+
+#: apps/vote/models.py:909
+msgid "email"
+msgstr "メール"
+
+#: apps/vote/models.py:910
+msgid "text"
+msgstr "ショートメール"
+
+#: apps/vote/models.py:911
+msgid "tweet"
+msgstr "ツイート"
+
+#: apps/vote/models.py:912
+msgid "in person"
+msgstr "直"
+
+#: apps/vote/models.py:913
+msgid "on the phone"
+msgstr "電話"
+
+#: apps/vote/models.py:1024
+msgid "Twitter attributes present on manual vote"
+msgstr "ツイッター属性はマニュアル表にあります"
+
+#: apps/vote/models.py:1027
+msgid "Attributes missing from manual vote"
+msgstr "属性はマニュアル表に足りません"
+
+#: apps/vote/models.py:1031
+msgid "Manual attributes present on Twitter vote"
+msgstr "マニュアル属性はツイッター表にあります"
+
+#: apps/vote/models.py:1034
+msgid "Twitter attributes missing from Twitter vote"
+msgstr "ツイッター属性はツイッター表にありません"
+
+#: apps/vote/models.py:1182
+#, python-brace-format
+msgid "{track} already played during {show}."
+msgstr "「{track}」は「{show}」の間にもう弾きました。"
+
+#: apps/vote/models.py:1201
+msgid "This play has already been tweeted"
+msgstr "この弾くことはもうツイートされました"
+
+#: apps/vote/models.py:1327
+#, python-brace-format
+msgid "{user.name} bought Take Back Love City for the RSPCA."
+msgstr "{user.name}さんは恋愛シティーを取り戻せをRSPCAのために買いました。"
+
+#: apps/vote/models.py:1328
+msgid "put up with bad music for animals"
+msgstr "動物のために悪い音楽に我慢しました"
+
+#: apps/vote/models.py:1336
+#, python-brace-format
+msgid ""
+"{user.name} donated to the Very Scary Scenario charity streams for Special "
+"Effect in 2016."
+msgstr ""
+"{user.name}さんは２０１６年Very Scary ScenarioのSpecial Effectを支援してチャ"
+"リチー生配信に施しました。"
+
+#: apps/vote/models.py:1338
+msgid "likes fun, hates exclusion"
+msgstr "楽しむのが好き、排除が嫌い"
+
+#: apps/vote/models.py:1346
+#, fuzzy, python-brace-format
+msgid ""
+"{user.name} donated to the Very Scary Scenario charity streams and Neko Desu "
+"All-Nighter for Cancer Research UK in 2017."
+msgstr ""
+"{user.name}さんは２０１７年Cancer Research UKを支援してVery Scary Scenarioの"
+"チャリチー生配信とネコデス完徹に施しました。"
+
+#: apps/vote/models.py:1348
+msgid "likes depriving people of sleep, hates cancer"
+msgstr "睡眠を剥ぐのが好き、癌が嫌い"
+
+#: apps/vote/views/__init__.py:84
+msgid "hipster"
+msgstr "ヒップスター"
+
+#: apps/vote/views/__init__.py:85
+msgid "indiscriminate"
+msgstr "矢鱈"
+
+#: apps/vote/views/__init__.py:86
+msgid "almost 100"
+msgstr "殆ど100"
+
+#: apps/vote/views/__init__.py:163
+msgid "Not a page"
+msgstr "ページではありません"
+
+#: apps/vote/views/__init__.py:180
+msgid "No such user :<"
+msgstr "そういうユーザーがいません (｡•́︿•̀｡)"
+
+#: apps/vote/views/__init__.py:195
+msgid "No tracks for this artist"
+msgstr "このアーティストはトラックがありません"
+
+#: apps/vote/views/__init__.py:214
+msgid "No tracks for this anime"
+msgstr "このアニメはトラックがありません"
+
+#: apps/vote/views/__init__.py:323
+msgid ""
+"Your disclosure is appreciated. The metadata youkai has been dispatched to "
+"address your concerns. None will know of its passing."
+msgstr ""
+"暴露には感謝しています. メタデータの妖怪は関心を扱うに派遣されました。誰でも"
+"通るのをしりません。"
+
+#: apps/vote/views/__init__.py:350
+msgid ""
+"Your request has been dispatched. May it glide strong and true through spam "
+"filters and indifference."
+msgstr ""
+"願いは急送されました。スパムフィルターや冷淡などに真っ直ぐ通り過ぎられるよう"
+"に。"
+
+#: apps/vote/views/admin.py:150
+msgid "{} track"
+msgstr "{}曲のトラック"
+
+#: apps/vote/views/admin.py:150
+msgid "{} tracks"
+msgstr "{}のトラック"
+
+#: apps/vote/views/admin.py:178
+msgid "'{}' hidden"
+msgstr "「{}」を隠れました"
+
+#: apps/vote/views/admin.py:187
+msgid "'{}' unhidden"
+msgstr "「{}」を現れさせました"
+
+#: apps/vote/views/admin.py:202
+msgid "vote added"
+msgstr "表を足りました"
+
+#: apps/vote/views/admin.py:238
+msgid "'{}' unblocked"
+msgstr "「{}」のブロックを解除しました"
+
+#: apps/vote/views/admin.py:256
+msgid "'{}' blocked"
+msgstr "「{}」をブロックしました"
+
+#: apps/vote/views/admin.py:269
+msgid "'{}' shortlisted"
+msgstr "「{}」をショートリストに追加しました"
+
+#: apps/vote/views/admin.py:282
+msgid "'{}' discarded"
+msgstr "「{}」を捨てました"
+
+#: apps/vote/views/admin.py:316
+msgid "'{}' reset"
+msgstr "「{}」をリセットしました"
+
+#: apps/vote/views/admin.py:353
+msgid "library updated"
+msgstr "ライブラリを修正しました"
+
+#: apps/vote/views/admin.py:366
+msgid "{} condemned"
+msgstr "{}さんを処しました"
+
+#: apps/vote/views/admin.py:366
+msgid "{} redeemed"
+msgstr "{}さんを度しました"
+
+#: apps/vote/views/admin.py:409
+msgid "{} shortlisted"
+msgstr "{}をショートリストに追加しました"
+
+#: apps/vote/views/admin.py:417
+msgid "{} hidden"
+msgstr "{}を隠れました"
+
+#: apps/vote/views/admin.py:425
+msgid "{} unhidden"
+msgstr "{}を現れさせました"
+
+#: apps/vote/views/admin.py:433
+msgid "{} discarded"
+msgstr "{}を捨てました"
+
+#: apps/vote/views/admin.py:441
+msgid "{} reset"
+msgstr "{}をリセットしました"
+
+#: apps/vote/views/admin.py:481
+msgid "note removed"
+msgstr "ノートを消しました"
+
+#: templates/404.html:5 templates/500.html:5
+msgid "ｗｈａｔ　ｄｉｄ　ｙｏｕ　ｄｏ"
+msgstr "ナ　ニ　ヲ　シ　マ　イ　マ　シ　タ　カ"
+
+#: templates/404.html:54
+msgid "＼(゜ロ＼)ココハドコ?"
+msgstr "＼(゜ロ＼)ｗｈｅｒｅ　ａｍ　ｉ?"
+
+#: templates/404.html:54
+msgid "(／ロ゜)／アタシハダアレ?;"
+msgstr "(／ロ゜)／ｗｈｏ　ａｍ　ｉ?;"
+
+#: templates/404.html:55
+msgid "ｅｒｒｏｒ　４０４"
+msgstr "エラー４０４"
+
+#: templates/500.html:56
+msgid "ｅｒｒｏｒ　５００"
+msgstr "エラー５００"
+
+#: templates/added.html:4 templates/archive.html:10
+msgid "F jS Y"
+msgstr "Y年Fd日"
+
+#: templates/added.html:4
+#, python-format
+msgid "new tracks for %(date)s"
+msgstr "%(date)sの新トラック"
+
+#: templates/added.html:7 templates/show_detail.html:8
+#: templates/track_detail.html:22 templates/include/pre_content.html:18
+msgid "F"
+msgstr "Y年"
+
+#: templates/added.html:7 templates/show_detail.html:8
+msgid "jS Y"
+msgstr "Fd日"
+
+#: templates/added.html:7
+#, python-format
+msgid "tracks added for %(date1)s&nbsp;%(date2)s"
+msgstr "%(date1)s%(date2)sにライブラリに追加されたトラック"
+
+#: templates/added.html:12 templates/show_detail.html:13
+msgid "current"
+msgstr "現在"
+
+#: templates/added.html:15 templates/show_detail.html:16
+msgid "all shows"
+msgstr "全ての番組"
+
+#: templates/added.html:20
+msgid "no older show"
+msgstr "もっと古い番組がありません"
+
+#: templates/added.html:25
+#, python-format
+msgid ""
+"\n"
+"    %(plays)s track played this week\n"
+"    "
+msgid_plural ""
+"\n"
+"    %(plays)s tracks played this week\n"
+"    "
+msgstr[0] ""
+"\n"
+"今週は%(plays)s曲のトラックが弾かされました\n"
+" "
+msgstr[1] ""
+"\n"
+"今週は%(plays)sのトラックが弾かされました\n"
+" "
+
+#: templates/added.html:39
+msgid "no tracks added this week ( ´· _ ·`)"
+msgstr "今週は新トラックがなかったです ( ´· _ ·`)"
+
+#: templates/admin_error.html:7
+#, python-format
+msgid "Failed to %(action)s :&lt;"
+msgstr "%(action)sが失敗しまいました (｡•́︿•̀｡)"
+
+#: templates/archive.html:12
+#, python-format
+msgid ""
+"\n"
+"          %(count)s play\n"
+"          "
+msgid_plural ""
+"\n"
+"          %(count)s plays\n"
+"          "
+msgstr[0] ""
+"\n"
+"%(count)s弾き\n"
+" "
+msgstr[1] ""
+"\n"
+"%(count)s弾き\n"
+" "
+
+#: templates/archive.html:17
+#, python-format
+msgid ""
+"\n"
+"          %(count)s vote\n"
+"          "
+msgid_plural ""
+"\n"
+"          %(count)s votes\n"
+"          "
+msgstr[0] ""
+"\n"
+"%(count)s表\n"
+" "
+msgstr[1] ""
+"\n"
+"%(count)s表\n"
+" "
+
+#: templates/archive.html:23
+#, python-format
+msgid ""
+"\n"
+"            %(count)s new track\n"
+"            "
+msgid_plural ""
+"\n"
+"            %(count)s new tracks\n"
+"            "
+msgstr[0] ""
+"\n"
+"%(count)s曲の新トラック\n"
+" "
+msgstr[1] ""
+"\n"
+"%(count)sの新トラック\n"
+" "
+
+#: templates/artless.html:5
+msgid "artless tracks"
+msgstr "絵がないトラック"
+
+#: templates/base.html:16 templates/pjax.html:4
+#: templates/include/pre_content.html:20
+msgid "a neko desu request robot"
+msgstr "ネコデスのリクエストロボット"
+
+#: templates/block.html:4
+#, python-format
+msgid "block %(title)s"
+msgstr "%(title)sをブロックする"
+
+#: templates/block.html:7
+#, python-format
+msgid "Block <a href=\"%(url)s\">%(title)s</a>"
+msgstr "<a href=\"%(url)s\">%(title)s</a>をブロックする"
+
+#: templates/confirm.html:7
+#, python-format
+msgid "Are you sure you want to %(action)s?"
+msgstr "%(action)sのは本当ですか"
+
+#: templates/confirm.html:16
+msgid "yep"
+msgstr "は〜い"
+
+#: templates/confirm.html:17
+msgid "NO SHIT NO NO NO NOT AT ALL"
+msgstr "いやいやだめダメやりたくナイ"
+
+#: templates/hidden.html:5 templates/include/post_content.html:8
+msgid "hidden tracks"
+msgstr "隠れたトラック"
+
+#: templates/index.html:32 templates/minitracklist.html:14
+#: templates/include/track.html:106
+msgid "shortlist"
+msgstr "ショートリスト"
+
+#: templates/index.html:48
+msgid "Want to vote for something else?"
+msgstr "他のに投票しませんか?"
+
+#: templates/index.html:52
+msgid "No requests yet"
+msgstr "まだリクエストがありません"
+
+#: templates/index.html:55
+msgid "We're not taking requests this week, sorry"
+msgstr "すみませんが、今週はリクエストを受け取りません"
+
+#: templates/index.html:57
+#, python-format
+msgid ""
+"Don't worry, your <a href=\"%(stats_url)s#most-dedicated-users\">impressive "
+"streaks</a> will not be considered broken, as long as you're back next week."
+msgstr ""
+"心配しなくて、<a href=\"%(stats_url)s#most-dedicated-users\">すごい連表は</a>"
+"来週戻ったら残ります。"
+
+#: templates/index.html:63
+#, python-format
+msgid ""
+"Search, browse the <a href=\"%(archive_url)s\">playlist archive</a> or just "
+"<a href=\"%(roulette_url)s\">throw darts at the wall</a>."
+msgstr ""
+"探す, <a href=\"%(archive_url)s\">プレイリストアーカイブ</a>をブラウズする、 "
+"それともただ<a href=\"%(roulette_url)s\">壁にダーツを降り出す</a>."
+
+#: templates/index.html:88
+msgid ""
+"You've added stuff to the shortlist since you last loaded the front page. "
+"Please reload before making any more changes."
+msgstr ""
+"フロントページをロードしたからショートリストに追加しました。また変絵る前に、"
+"リロードして下さい。"
+
+#: templates/inudesu.html:4
+msgid "inu desu tracks"
+msgstr "イヌデスのトラック"
+
+#: templates/library_update.html:13
+msgid "Has been added"
+msgstr "追加されました"
+
+#: templates/library_update.html:15
+msgid "Has been removed and will be hidden"
+msgstr "消しました、隠れます"
+
+#: templates/library_update.html:20
+#, python-format
+msgid "<em>%(field)s</em> used to be:"
+msgstr "<em>%(field)s</em>は元々:"
+
+#: templates/library_update.html:21 templates/library_update.html.py:23
+msgid "empty"
+msgstr "無し"
+
+#: templates/library_update.html:22
+msgid "and has been changed to:"
+msgstr "そして今は:"
+
+#: templates/library_update.html:28
+msgid "Unknown change; please file a bug."
+msgstr "変えるのは分かりません、バグを報告して下さい。"
+
+#: templates/library_update.html:34
+msgid "Nothing changed."
+msgstr "何も変わっていません。"
+
+#: templates/manual_vote.html:4 templates/include/track.html:89
+msgid "manual vote"
+msgstr "マニュアル表する"
+
+#: templates/manual_vote.html:7
+#, python-format
+msgid "Add manual vote for <a href=\"%(url)s\">%(title)s</a>"
+msgstr "<a href=\"%(url)s\">%(title)s</a>の表を追加する"
+
+#: templates/minitracklist.html:7
+#, python-format
+msgid ""
+"\n"
+"      %(selection|length)s song selected\n"
+"      "
+msgid_plural ""
+"\n"
+"      %(selection|length)s songs selected\n"
+"      "
+msgstr[0] ""
+"\n"
+"%(selection|length)s曲のトラックが選んでいます\n"
+" "
+msgstr[1] ""
+"\n"
+"%(selection|length)sのトラックが選んでいます\n"
+" "
+
+#: templates/minitracklist.html:15 templates/include/track.html:107
+msgid "discard"
+msgstr "捨てる"
+
+#: templates/minitracklist.html:16
+msgid "reset"
+msgstr "リセットする"
+
+#: templates/minitracklist.html:19 templates/include/track.html:101
+msgid "hide"
+msgstr "隠れる"
+
+#: templates/minitracklist.html:20 templates/include/track.html:99
+msgid "unhide"
+msgstr "現れさせる"
+
+#: templates/minitracklist.html:24
+msgid "vote for all"
+msgstr "全部に投票する"
+
+#: templates/minitracklist.html:26
+msgid "too many tracks"
+msgstr "トラックは多いすぎます"
+
+#: templates/minitracklist.html:30
+msgid "clear selection"
+msgstr "選択を全部解除する"
+
+#: templates/minitracklist.html:32
+msgid "select all"
+msgstr "全部を選ぶ"
+
+#: templates/minitracklist.html:52
+msgid "deselect"
+msgstr "この選択を解除する"
+
+#: templates/note.html:4
+msgid "note"
+msgstr "ノート"
+
+#: templates/note.html:7
+#, python-format
+msgid " Add note for <a href=\"%(url)s\">%(title)s</a>"
+msgstr " <a href=\"%(url)s\">%(title)s</a>にノートを追加する"
+
+#: templates/report.html:5
+msgid "Report bad metadata"
+msgstr "悪いメタデータを報告する"
+
+#: templates/request.html:5
+msgid "Request a new song"
+msgstr "新しいトラックを頼む"
+
+#: templates/request.html:7
+msgid ""
+"Please include as much information about the song you want as possible. Any "
+"information you can provide will make it easier to find and include your "
+"song."
+msgstr ""
+"できるだけ歌の情報を入れて下さい。情報は多ければ、歌を探して追加するのは安く"
+"なります。"
+
+#: templates/roulette.html:4
+#, python-format
+msgid "%(mode_name)s roulette"
+msgstr "%(mode_name)sルーレット"
+
+#: templates/roulette.html:25
+msgid "these are all terrible"
+msgstr "全部ひどい"
+
+#: templates/search.html:6
+msgid "search results"
+msgstr "検索結果"
+
+#: templates/search.html:15
+msgid "Can't find what you're looking for?"
+msgstr "探し物を見つからないのか"
+
+#: templates/search.html:15
+msgid "Get it added to the library"
+msgstr "ライブラリに追加させる"
+
+#: templates/show_detail.html:8
+#, python-format
+msgid "playlist for %(date1)s&nbsp;%(date2)s"
+msgstr "%(date1)s%(date2)sのプレイリスト"
+
+#: templates/show_detail.html:11
+msgid "newer"
+msgstr "新しくて"
+
+#: templates/show_detail.html:19
+msgid "older"
+msgstr "古くて"
+
+#: templates/show_detail.html:26
+#, python-format
+msgid ""
+"\n"
+"    %(length)s track added this week \n"
+"    "
+msgid_plural ""
+"\n"
+"    %(length)s tracks added this week\n"
+"    "
+msgstr[0] ""
+"\n"
+"%(length)s曲の新トラックは今週追加されました\n"
+" "
+msgstr[1] ""
+"\n"
+"%(length)sの新トラックは今週追加されました\n"
+" "
+
+#: templates/show_detail.html:37
+msgid ""
+"There was a problem connecting to the Mixcloud API; I have no idea if this "
+"show is archived."
+msgstr ""
+"MixcloudのAPIに繋がることは問題がありました。この番組はアーカイブされたのは全"
+"然しりません。"
+
+#: templates/show_detail.html:41
+msgid "listen on mixcloud"
+msgstr "Mixcloudに聞く"
+
+#: templates/stats.html:10
+msgid "most successful users"
+msgstr "一番成功してユーザー"
+
+#: templates/stats.html:11 templates/stats.html.py:24 templates/stats.html:50
+msgid "in the last six months"
+msgstr "先６ヶ月に"
+
+#: templates/stats.html:14 templates/stats.html.py:27 templates/stats.html:40
+msgid "user"
+msgstr "ユーザー"
+
+#: templates/stats.html:15 templates/stats.html.py:28
+msgid "batting average"
+msgstr "打率"
+
+#: templates/stats.html:23
+msgid "least successful users"
+msgstr "一番成功しないユーザー"
+
+#: templates/stats.html:37
+msgid "most dedicated users"
+msgstr "一番検診なユーザー"
+
+#: templates/stats.html:41
+msgid "current streak"
+msgstr "今の連表"
+
+#: templates/stats.html:49
+msgid "most popular tracks"
+msgstr "一番人気のトラック"
+
+#: templates/stats.html:53
+msgid "track"
+msgstr "トラック"
+
+#: templates/stats.html:54
+msgid "votes"
+msgstr "表"
+
+#: templates/track_detail.html:20
+msgid "report bad metadata"
+msgstr "悪いメタデータを報告する"
+
+#: templates/track_detail.html:22
+msgid "jS, Y"
+msgstr "Fd日"
+
+#: templates/track_detail.html:22
+#, python-format
+msgid ""
+"\n"
+"added to the library on <a href=\"%(url)s\">%(date1)s&nbsp;%(date2)s\n"
+msgstr ""
+"\n"
+"<a href=\"%(url)s\">%(date1)s&nbsp;%(date2)sにライブラリに追加されました\n"
+
+#: templates/track_detail.html:27
+msgid "play history"
+msgstr "弾き記録"
+
+#: templates/track_detail.html:31
+msgid "F jS, Y"
+msgstr "Y年Fd日"
+
+#: templates/track_detail.html:36
+msgid "no plays on record"
+msgstr "弾くの記録がありません"
+
+#: templates/trivia.html:6 templates/include/post_content.html:13
+msgid "bad trivia"
+msgstr "悪いトリビア"
+
+#: templates/twitter_user_detail.html:25
+msgid "needs to vote more"
+msgstr "もっと投票は必要です"
+
+#: templates/twitter_user_detail.html:27
+#, python-format
+msgid ""
+" \n"
+"      batting at <strong>%(average)s</strong> over the last six months \n"
+"      "
+msgstr ""
+" \n"
+"      全６ヶ月の打率は<strong>%(average)s</strong>です \n"
+"      "
+
+#: templates/twitter_user_detail.html:33
+#, python-format
+msgid ""
+" \n"
+"      voted for the last <strong>%(streak)s</strong> consecutive shows\n"
+"      "
+msgstr ""
+" \n"
+"      <strong>%(streak)s</strong>連話で投票しました\n"
+"      "
+
+#: templates/twitter_user_detail.html:41
+#, python-format
+msgid ""
+"\n"
+"          redeem %(voter)s\n"
+"          "
+msgstr ""
+"\n"
+"          %(voter)sを度する\n"
+"          "
+
+#: templates/twitter_user_detail.html:45
+#, python-format
+msgid ""
+"\n"
+"          condemn %(voter)s\n"
+"          "
+msgstr ""
+"\n"
+"          %(voter)sを処する\n"
+"          "
+
+#: templates/twitter_user_detail.html:53
+#, python-format
+msgid ""
+"\n"
+"      %(name)s is condemned until further notice.\n"
+"      "
+msgstr ""
+"\n"
+"      %(name)sはさらに通知するまで処されました。\n"
+"      "
+
+#: templates/twitter_user_detail.html:56
+msgid ""
+"requests will still appear on tracks, but will not influence their position "
+"on the front page."
+msgstr "リクエストはトラック面に見えるが、フロントページの拠点を影響しません。"
+
+#: templates/twitter_user_detail.html:68
+msgid "More info&hellip;"
+msgstr "もっと情報&hellip;"
+
+#: templates/include/inline_vote.html:25
+#, python-format
+msgid "via %(kind)s"
+msgstr "%(kind)s経由"
+
+#: templates/include/paginator.html:7 templates/include/paginator.html.py:9
+msgid "prev"
+msgstr "前"
+
+#: templates/include/paginator.html:13
+#, python-format
+msgid ""
+"\n"
+"          <span class=\"count current\">%(number)s</span> of <span class="
+"\"count\">%(num_pages)s</span>\n"
+"        "
+msgstr ""
+"\n"
+"          <span class=\"count\">%(num_pages)sページ</span>の<span class="
+"\"count current\">%(number)s</span>\n"
+"        "
+
+#: templates/include/paginator.html:19 templates/include/paginator.html:21
+msgid "next"
+msgstr "次"
+
+#: templates/include/paginator.html:27
+#, python-format
+msgid ""
+"\n"
+"          <span class=\"count current\">%(start)s-%(end)s</span> of <span>"
+"%(count)s</span>\n"
+"        "
+msgstr ""
+"\n"
+"          <span>%(count)s</span>の<span class=\"count current\">%(start)s-"
+"%(end)s</span>\n"
+"        "
+
+#: templates/include/post_content.html:4
+msgid "\"the music for the blind logo\""
+msgstr "\"music for the blindのロゴ\""
+
+#: templates/include/post_content.html:4
+msgid "\"toats a colons joint\""
+msgstr "\"やっぱりcolonsのものだ\""
+
+#: templates/include/post_content.html:7
+msgid "admin"
+msgstr "アドミン"
+
+#: templates/include/post_content.html:9
+msgid "all the anime"
+msgstr "アニメの全部"
+
+#: templates/include/post_content.html:11
+msgid "artless"
+msgstr "絵が無い"
+
+#: templates/include/post_content.html:12
+msgid "update library"
+msgstr "ライブラリを修正する"
+
+#: templates/include/post_content.html:14
+msgid "log out"
+msgstr "ログアウトする"
+
+#: templates/include/post_content.html:16
+msgid "help"
+msgstr "ヘルプ"
+
+#: templates/include/post_content.html:17
+msgid "api"
+msgstr "API"
+
+#: templates/include/post_content.html:18
+msgid "source"
+msgstr "ソース"
+
+#: templates/include/post_content.html:19
+msgid "report a bug"
+msgstr "バグを報告する"
+
+#: templates/include/post_content.html:20 templates/registration/login.html:4
+#: templates/registration/login.html:7
+msgid "log in"
+msgstr "ログイン"
+
+#: templates/include/pre_content.html:16
+msgid ""
+"on air! listen live at <a target=\"_blank\" href=\"http://thisisthecat.com"
+"\">the&nbsp;cat</a>"
+msgstr ""
+"今オンエア! ライブで<a target=\"_blank\" href=\"http://thisisthecat.com"
+"\">ŧħḗ&nbsp;ƈȧŧ</a>に聞く"
+
+#: templates/include/pre_content.html:18
+msgid "jS"
+msgstr "Fd日"
+
+#: templates/include/pre_content.html:18
+#, python-format
+msgid ""
+"next <a href=\"http://nekodesu.co.uk/\">neko desu</a>: %(date1)s&nbsp;"
+"%(date2)s"
+msgstr ""
+"次の<a href=\"http://nekodesu.co.uk/\">ネコデス</a>:<br />%(date1)s%(date2)s"
+
+#: templates/include/track.html:88
+msgid "play"
+msgstr "弾く"
+
+#: templates/include/track.html:91
+msgid "unblock"
+msgstr "ブロックを解除する"
+
+#: templates/include/track.html:93
+msgid "block"
+msgstr "ブロックする"
+
+#: templates/include/track.html:94
+msgid "announce"
+msgstr "発表する"
+
+#: templates/include/track.html:104
+msgid "reset shortlist/discard"
+msgstr "ショートリストをリセットする／捨てる"
+
+#: templates/include/track.html:109
+msgid "add note"
+msgstr "ノートを追加する"
+
+#: templates/include/track.html:123
+msgid "request this song"
+msgstr "この歌をリクエストする"
+
+#: templates/registration/login.html:10
+msgid "wrong username/password, sorry"
+msgstr "すみませんが、ユーザー名やパスワードのどちらかが間違えています"
+
+#~ msgid "F&nbsp;jS Y"
+#~ msgstr "Y年Fd日"
+
+#~ msgid "playlist for %(date)s"
+#~ msgstr "%(date)sのプレーリスト"

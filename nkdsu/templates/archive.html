@@ -1,4 +1,5 @@
 {% extends parent %}
+{% load i18n %}
 
 {% block title %}archive{% endblock %}
 
@@ -6,12 +7,24 @@
   <ul class="archive">
     {% for show in object_list %}
       <li class="show">
-        <h2><a href="{{ show.get_absolute_url }}">{{ show.showtime|date:"F jS Y" }}</a></h2>
+        <h2><a href="{{ show.get_absolute_url }}">{{ show.showtime|date:_("F jS Y") }}</a></h2>
         <p class="subheading">
-          <span><a href="{{ show.get_absolute_url }}">{{ show.play_set.count }} play{{ show.play_set.count|pluralize }}</a></span>
-          <span>{{ show.vote_set.count }} vote{{ show.vote_set.count|pluralize }}</span>
+          <span><a href="{{ show.get_absolute_url }}">{% blocktrans count count=show.play_set.count %}
+          {{ count }} play
+          {% plural %}
+          {{ count }} plays
+          {% endblocktrans %}</a></span>
+          <span>{% blocktrans count count=show.vote_set.count %}
+          {{ count }} vote
+          {% plural %}
+          {{ count }} votes
+          {% endblocktrans %}</span>
           {% if show.revealed.count %}
-            <span><a href="{{ show.get_revealed_url }}">{{ show.revealed.count }} new track{{ show.revealed.count|pluralize }}</a></span>
+            <span><a href="{{ show.get_revealed_url }}">{% blocktrans count count=show.revealed.count %}
+            {{ count }} new track
+            {% plural %}
+            {{ count }} new tracks
+            {% endblocktrans %}</a></span>
           {% endif %}
         </p>
       </li>

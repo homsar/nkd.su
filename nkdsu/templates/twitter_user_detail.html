@@ -1,5 +1,6 @@
 {% extends parent %}
 {% load vote_tags cache %}
+{% load i18n %}
 
 {% block title %}{{ voter.name }}{% endblock %}
 
@@ -21,28 +22,38 @@
     </p>
 
     {% if voter.batting_average == None %}
-      <p class="subheading">needs to vote more</p>
+      <p class="subheading">{% trans "needs to vote more" %}</p>
     {% else %}
-      <p class="subheading">batting at <strong>{{ voter.batting_average|percent }}</strong> over the last six months</p>
+      <p class="subheading">{% blocktrans with average=voter.batting_average|percent %} 
+      batting at <strong>{{ average }}</strong> over the last six months 
+      {% endblocktrans %}</p>
     {% endif %}
 
     {% if voter.streak > 1 %}
-      <p class="subheading">voted for the last <strong>{{ voter.streak }}</strong> consecutive shows</p>
+      <p class="subheading">{% blocktrans with streak=voter.streak %} 
+      voted for the last <strong>{{ streak }}</strong> consecutive shows
+      {% endblocktrans %}</p>
     {% endif %}
 
     {% if user.is_authenticated %}
       <p class="subheading"><a href="{{ voter.get_toggle_abuser_url }}">
         {% if voter.is_abuser %}
+          {% blocktrans %}
           redeem {{ voter }}
+          {% endblocktrans %}
         {% else %}
+          {% blocktrans %}
           condemn {{ voter }}
+          {% endblocktrans %}
         {% endif %}
       </a></p>
     {% endif %}
 
     {% if voter.is_abuser %}
-      <p class="subheading"><strong>{{ voter.name }} is condemned until further notice.</strong></p>
-      <p class="subheading">requests will still appear on tracks, but will not influence their position on the front page.</p>
+      <p class="subheading"><strong>{% blocktrans with name=voter.name %}
+      {{ name }} is condemned until further notice.
+      {% endblocktrans %}</strong></p>
+      <p class="subheading">{% trans "requests will still appear on tracks, but will not influence their position on the front page." %}</p>
     {% endif %}
 
     {% if voter.userbadge_set.all %}
@@ -54,7 +65,7 @@
             <p>{{ badge.badge_info.description }}</p>
 
             {% if badge.badge_info.url %}
-              <p><a href="{{ badge.badge_info.url }}">More info&hellip;</a></p>
+              <p><a href="{{ badge.badge_info.url }}">{% trans "More info&hellip;" %}</a></p>
             {% endif %}
           </li>
         {% endfor %}

@@ -1,9 +1,10 @@
 {% extends parent %}
+{% load i18n %}
 
-{% block title %}note{% endblock %}
+{% block title %}{% trans "note" %}{% endblock %}
 
 {% block content %}
-  <h2 class=message>Add note for <a href="{{ track.get_absolute_url }}">{{ track.title }}</a></h2>
+  <h2 class=message>{% blocktrans with url=track.get_absolute_url title=track.title %} Add note for <a href="{{ url }}">{{ title }}</a>{% endblocktrans %}</h2>
 
   <form class="login" method="post" action=".">
     {% csrf_token %}

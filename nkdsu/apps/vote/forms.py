@@ -6,6 +6,8 @@ import tweepy
 from django import forms
 from django.core.validators import validate_email
 from django.utils.safestring import mark_safe
+from django.utils.translation import gettext_lazy as _
+
 
 from .models import Request, Note
 from ..vote import trivia
@@ -20,13 +22,13 @@ def email_or_twitter(address):
             reading_tw_api.get_user(screen_name=address.lstrip('@'))
         except tweepy.TweepError:
             raise forms.ValidationError(
-                'Enter a valid email address or twitter username')
+                _('Enter a valid email address or twitter username'))
 
 
 class EmailOrTwitterField(forms.EmailField):
     widget = forms.TextInput
     default_error_messages = {
-        'invalid': u'Enter a valid email address or Twitter username',
+        'invalid': _(u'Enter a valid email address or Twitter username'),
     }
     default_validators = [email_or_twitter]
 
@@ -70,9 +72,9 @@ class TriviaForm(forms.Form):
 
         if not human:
             hint = (
-                "That's not right, sorry. There are hints <a href='https://"
-                "github.com/colons/nkd.su/blob/master/nkdsu/apps/vote/"
-                "trivia.py'>here</a>."
+                _("That's not right, sorry. There are hints <a href='https://"
+                  "github.com/colons/nkd.su/blob/master/nkdsu/apps/vote/"
+                  "trivia.py'>here</a>.")
             )
             raise forms.ValidationError([mark_safe(hint)])
 
@@ -81,20 +83,20 @@ class TriviaForm(forms.Form):
 
 class BadMetadataForm(TriviaForm):
     details = forms.CharField(widget=forms.Textarea,
-                              label="What needs fixing?", required=False)
-    contact = EmailOrTwitterField(label="Email/Twitter (not required)",
+                              label=_("What needs fixing?"), required=False)
+    contact = EmailOrTwitterField(label=_("Email/Twitter (not required)"),
                                   required=False)
 
 
 class RequestForm(TriviaForm):
     title = forms.CharField(required=False)
     artist = forms.CharField(required=False)
-    show = forms.CharField(label="Source Anime", required=False)
-    role = forms.CharField(label="Role (OP/ED/Insert/Character/etc.)",
+    show = forms.CharField(label=_("Source Anime"), required=False)
+    role = forms.CharField(label=_("Role (OP/ED/Insert/Character/etc.)"),
                            required=False)
     details = forms.CharField(widget=forms.Textarea,
-                              label="Additional Details", required=False)
-    contact = EmailOrTwitterField(label="Email Address/Twitter name",
+                              label=_("Additional Details"), required=False)
+    contact = EmailOrTwitterField(label=_("Email Address/Twitter name"),
                                   required=True)
 
     def clean(self):
@@ -107,14 +109,14 @@ class RequestForm(TriviaForm):
 
         if len(filled) < 2:
             raise forms.ValidationError(
-                "I'm sure you can give us more information than that.")
+                _("I'm sure you can give us more information than that."))
 
         return cleaned_data
 
 
 class LibraryUploadForm(forms.Form):
-    library_xml = forms.FileField(label='Library XML')
-    inudesu = forms.BooleanField(label='Inu Desu', required=False)
+    library_xml = forms.FileField(label=_('Library XML'))
+    inudesu = forms.BooleanField(label=_('Inu Desu'), required=False)
 
 
 class NoteForm(forms.ModelForm):

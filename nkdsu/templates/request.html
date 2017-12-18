@@ -1,10 +1,10 @@
 {% extends parent %}
-
+{% load i18n %}
 
 {% block content %}
-  <h2 class=message>Request a new song</h2>
+  <h2 class=message>{% trans "Request a new song" %}</h2>
 
-  <p class="aside">Please include as much information about the song you want as possible. Any information you can provide will make it easier to find and include your song.</p>
+  <p class="aside">{% trans "Please include as much information about the song you want as possible. Any information you can provide will make it easier to find and include your song." %}</p>
 
   <form class="reqeust" method="post" enctype="multipart/form-data" action=".">
     {% csrf_token %}
